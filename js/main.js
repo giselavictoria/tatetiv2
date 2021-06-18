@@ -122,7 +122,6 @@ function jugar(slot) {
     }
   } else if (ganador) {
     console.log("entro al if del slots");
-    slot.contenedor.removeEventListener("click", () => jugar(slot));
   }
 }
 
@@ -157,53 +156,3 @@ function resetJugar() {
 }
 
 botonReset.addEventListener("click", resetJugar);
-
-/*slots.forEach((slot, i) => {
-  slot.contenedor.addEventListener("click", function () {
-    if (
-      contadorJugadas === 0 ||
-      contadorJugadas === 2 ||
-      contadorJugadas === 4 ||
-      contadorJugadas === 6 ||
-      contadorJugadas === 8
-    ) {
-      if (!slot.slotClicked) {
-        slot.pintarRosa();
-        jugadasPlayer1.push(slot.slotId);
-        console.log(jugadasPlayer1);
-        busqueda(posicionesGanadoras, jugadasPlayer1);
-        slot.slotClicked = true;
-        contadorJugadas++;
-        if (resultado === true) {
-          ganador = true;
-          console.log("gano player 1");
-        }
-      } else if (slot.slotClicked) {
-        console.log("pinta otro");
-      }
-    } else if (
-      contadorJugadas === 1 ||
-      contadorJugadas === 3 ||
-      contadorJugadas === 5 ||
-      contadorJugadas === 7
-    ) {
-      if (!slot.slotClicked) {
-        slot.pintarVerde();
-        jugadasPlayer2.push(slot.slotId);
-        console.log(jugadasPlayer2);
-        busqueda(posicionesGanadoras, jugadasPlayer2);
-        slot.slotClicked = true;
-        contadorJugadas++;
-        if (resultado === true) {
-          ganador = true;
-          console.log("gano player 2");
-        }
-      } else if (slot.slotClicked === false) {
-        console.log("pinta otro");
-      }
-    }
-    if (ganador === true) {
-      console.log("ya hay un ganador");
-    }
-  });
-});*/
