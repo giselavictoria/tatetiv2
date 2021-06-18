@@ -10,6 +10,7 @@ let player1Score = document.getElementById("player1Score");
 let player2Score = document.getElementById("player2Score");
 
 let botonJugar = document.getElementById("botonJugar");
+let botonReset = document.getElementById("botonReset");
 
 let grillaContainer = document.querySelector(".grillaContainer");
 
@@ -33,7 +34,6 @@ let posicionesGanadoras = [
 
 let ganador = false;
 let contadorJugadas = 0;
-let resultado;
 
 botonJugar.addEventListener("click", function () {
   player1.innerHTML = inputPlayer1.value;
@@ -64,24 +64,25 @@ for (let i = 0; i < 9; i++) {
   slots.push(new Slot(document.getElementById("slot" + i), i));
 }
 
-slots.forEach((slot) => {
-  slot.contenedor.addEventListener("click", () => jugar(slot));
-});
+// esta funcion recorre el array y agrega add event listener a cada slot
+function agregarEventsSlots() {
+  slots.forEach((slot) => {
+    slot.contenedor.addEventListener("click", () => jugar(slot));
+  });
+}
 
+agregarEventsSlots();
+
+// esta funcion evalua el juego por cada movida de cada jugador
 function jugar(slot) {
+  let resultado = false;
   if (!ganador) {
-    if (
-      contadorJugadas === 0 ||
-      contadorJugadas === 2 ||
-      contadorJugadas === 4 ||
-      contadorJugadas === 6 ||
-      contadorJugadas === 8
-    ) {
+    if (contadorJugadas % 2 === 0) {
       if (!slot.slotClicked) {
         slot.pintarRosa();
         jugadasPlayer1.push(slot.slotId);
         console.log(jugadasPlayer1);
-        busqueda(posicionesGanadoras, jugadasPlayer1);
+        resultado = busqueda(posicionesGanadoras, jugadasPlayer1);
         slot.slotClicked = true;
         contadorJugadas++;
         if (resultado) {
@@ -97,17 +98,12 @@ function jugar(slot) {
       } else if (slot.slotClicked) {
         console.log("pinta otro");
       }
-    } else if (
-      contadorJugadas === 1 ||
-      contadorJugadas === 3 ||
-      contadorJugadas === 5 ||
-      contadorJugadas === 7
-    ) {
+    } else if (contadorJugadas % 2 === 1) {
       if (!slot.slotClicked) {
         slot.pintarVerde();
         jugadasPlayer2.push(slot.slotId);
         console.log(jugadasPlayer2);
-        busqueda(posicionesGanadoras, jugadasPlayer2);
+        resultado = busqueda(posicionesGanadoras, jugadasPlayer2);
         slot.slotClicked = true;
         contadorJugadas++;
         if (resultado) {
@@ -130,7 +126,9 @@ function jugar(slot) {
   }
 }
 
+// esta funcion recibe dos arrays y verifica si en el arr2 estan todos los items del arr1
 function busqueda(arr1, arr2) {
+  let resultado = false;
   for (var i = 0; i < arr1.length; i++) {
     resultado = arr1[i].every((item) => arr2.includes(item));
     console.log(resultado);
@@ -138,11 +136,27 @@ function busqueda(arr1, arr2) {
       break;
     }
   }
+  return resultado;
 }
 
+// esta funcion actualiza el score de cada jugador en el html
 function updateScore(player, score) {
   player.innerHTML = score;
 }
+
+// esta funcion resetea las variables del juego
+function resetJugar() {
+  slots.forEach((slot) => {
+    slot.contenedor.style.background = "whitesmoke";
+    slot.slotClicked = false;
+  });
+  jugadasPlayer1 = [];
+  jugadasPlayer2 = [];
+  contadorJugadas = 0;
+  ganador = false;
+}
+
+botonReset.addEventListener("click", resetJugar);
 
 /*slots.forEach((slot, i) => {
   slot.contenedor.addEventListener("click", function () {
