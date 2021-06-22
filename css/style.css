@@ -4,10 +4,9 @@
   box-sizing: border-box;
 }
 
-
-#pantallaCarga{
-  height: 70vh;
-  
+header {
+  height: 100px;
+  background-color: hotpink;
 }
 
 #pantallaJuego {
@@ -41,14 +40,11 @@
 }
 
 footer {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 50px;
-  background-color: #e84a5f;
+  height: 75px;
+  background-color: hotpink;
 }
 
-.pink{
+.pink {
   background-color: pink;
 }
 
@@ -56,6 +52,6 @@ footer {
   background-color: green;
 }
 
-#modal{
+#modal {
   display: none;
 }

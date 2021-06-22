@@ -11,11 +11,11 @@
   <body>
 
     <!-- HEADER -->
-    <header>
-      <div class="container text-center">
+    <header class="mb-4 d-flex align-items-center justify-content-center">
+      <div class="container-fluid d-flex justify-content-center align-self-center">
         <div class="row">
-          <div class="col-md-12 ">
-            <h1>TA TE TI</h1>
+          <div class="col-md-12 text-center">
+            <h1 class="m-0">TA TE TI</h1>
           </div>
         </div>
       </div>
@@ -26,7 +26,7 @@
       <div class="container d-flex flex-column align-items-center">
         <div class="row">
 
-          <div class="col-md-12 text-center">
+          <div class="col-md-12 text-center mb-4">
             <h2>Ingresa los nombres de los jugadores</h2>
           </div>
 
@@ -40,18 +40,15 @@
               <input type="text" class="form-control" id="inputJugador2" placeholder="Jugador 2" name="jugador2">
               <label for="inputJugador2">Jugador 2</label>
             </div>
-            <!-- <div>
-              <label for="jugador1">Jugador 1</label>
-              <input type="text" placeholder="....." id="inputJugador1" name="jugador1">
-            </div>
-            <div>
-              <label for="jugador2">Jugador 2</label>
-              <input type="text" placeholder="......" id="inputJugador2" name="jugador2">
-            </div> -->
-
             <button id="botonJugar" type="button" class="col-md-3 btn btn-primary">Jugar</button>
             </div>
           </form>
+
+          <div class="col-md-12 text-center mt-4 mb-4">
+            <h2 class="mb-4">Instrucciones del juego</h2>
+            <p>Comienza el juego el Jugador 1, su color es el rosa</p>
+            <p>El siguiente en jugar es el Jugador 2, su color es el verde</p>
+          </div>
         </div>
       </div>
     </section>
@@ -109,9 +106,15 @@
   </div>
 </div>
 
-    <!-- FOOTER -->
-    <footer>
-      <p>Desarrollado por Gisela Vercellino</p>
+    <!-- HEADER -->
+    <footer class="d-flex justify-content-center align-self-center">
+      <div class="container-fluid d-flex justify-content-center align-self-center">
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <p class="m-0">Desarrollado por Gisela Vercellino</p>
+          </div>
+        </div>
+      </div>
     </footer>
 
     
