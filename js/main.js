@@ -50,11 +50,11 @@ class Slot {
   }
 
   pintarRosa() {
-    this.contenedor.style.background = "pink";
+    this.contenedor.classList.add("pink");
   }
 
   pintarVerde() {
-    this.contenedor.style.background = "green";
+    this.contenedor.classList.add("green")
   }
 }
 
@@ -146,7 +146,8 @@ function updateScore(player, score) {
 // esta funcion resetea las variables del juego
 function resetJugar() {
   slots.forEach((slot) => {
-    slot.contenedor.style.background = "whitesmoke";
+    slot.contenedor.classList.remove("pink");
+    slot.contenedor.classList.remove("green");
     slot.slotClicked = false;
   });
   jugadasPlayer1 = [];
