@@ -59,3 +59,7 @@ footer {
 .green {
   background-color: green;
 }
+
+#modal{
+  display: none;
+}

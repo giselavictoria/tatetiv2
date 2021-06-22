@@ -12,6 +12,9 @@ let player2Score = document.getElementById("player2Score");
 let botonJugar = document.getElementById("botonJugar");
 let botonReset = document.getElementById("botonReset");
 
+let myModal = new bootstrap.Modal(document.getElementById("myModal"))
+let modalTexto = document.getElementById("modalTexto")
+
 let grillaContainer = document.querySelector(".grillaContainer");
 
 let jugadasPlayer1 = [];
@@ -35,6 +38,7 @@ let posicionesGanadoras = [
 let ganador = false;
 let contadorJugadas = 0;
 
+//boton que da inicio al juego
 botonJugar.addEventListener("click", function () {
   player1.innerHTML = inputPlayer1.value;
   player2.innerHTML = inputPlayer2.value;
@@ -42,6 +46,7 @@ botonJugar.addEventListener("click", function () {
   pantallaJuego.style.display = "block";
 });
 
+//crea la clase de slots con los metodos para pintar cada slot
 class Slot {
   constructor(contenedor, slotId) {
     this.contenedor = contenedor;
@@ -58,6 +63,7 @@ class Slot {
   }
 }
 
+// instancia cada slot 
 const slots = [];
 
 for (let i = 0; i < 9; i++) {
@@ -71,6 +77,7 @@ function agregarEventsSlots() {
   });
 }
 
+// invoca la funcion
 agregarEventsSlots();
 
 // esta funcion evalua el juego por cada movida de cada jugador
@@ -92,8 +99,12 @@ function jugar(slot) {
           console.log(scoreTotalPlayer1);
           updateScore(player1Score, scorePartidaPlayer1);
           console.log("gano player 1");
+          modalTexto.innerText = `Felicitaciones ${inputPlayer1.value}, sos el ganador de esta partida`
+          myModal.show()
         } else if (!ganador && contadorJugadas === 9) {
           console.log("Es un empate");
+          modalTexto.innerText = `Esta vez no gano nadie, es un empate`
+          myModal.show()
         }
       } else if (slot.slotClicked) {
         console.log("pinta otro");
@@ -113,8 +124,12 @@ function jugar(slot) {
           console.log(scoreTotalPlayer2);
           updateScore(player2Score, scorePartidaPlayer2);
           console.log("gano player 2");
+          modalTexto.innerText = `Felicitaciones ${inputPlayer2.value}, sos el ganador de esta partida`
+          myModal.show()
         } else if (!ganador && contadorJugadas === 9) {
           console.log("Es un empate");
+          modalTexto.innerText = `Esta vez no gano nadie, es un empate`
+          myModal.show()
         }
       } else if (slot.slotClicked) {
         console.log("pinta otro");
