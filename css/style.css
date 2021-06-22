@@ -4,14 +4,10 @@
   box-sizing: border-box;
 }
 
-h1,
-h4 {
-  text-align: center;
-  padding: 20px 0px;
-}
 
-h3 {
-  display: inline-block;
+#pantallaCarga{
+  height: 70vh;
+  
 }
 
 #pantallaJuego {
