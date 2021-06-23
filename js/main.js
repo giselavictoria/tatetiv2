@@ -10,12 +10,12 @@ let player1Score = document.getElementById("player1Score");
 let player2Score = document.getElementById("player2Score");
 
 let botonJugar = document.getElementById("botonJugar");
-let botonReset = document.getElementById("botonReset");
+let botonLimpiar = document.getElementById("botonLimpiar");
+let botonReiniciarJuego = document.getElementById("botonReiniciarJuego");
+let botonGuardarPartida = document.getElementById("botonGuardarPartida");
 
 let myModal = new bootstrap.Modal(document.getElementById("myModal"));
 let modalTexto = document.getElementById("modalTexto");
-
-let grillaContainer = document.querySelector(".grillaContainer");
 
 let jugadasPlayer1 = [];
 let jugadasPlayer2 = [];
@@ -46,6 +46,19 @@ botonJugar.addEventListener("click", function () {
 	pantallaJuego.style.display = "block";
 });
 
+botonReiniciarJuego.addEventListener("click", function () {
+	reiniciarJuego();
+	limpiarTablero();
+	clearScore(player1Score);
+	clearScore(player2Score);
+	localStorage.clear();
+	localStorage.removeItem(getData);
+	player1.innerHTML = inputPlayer1.value;
+	player2.innerHTML = inputPlayer2.value;
+	pantallaCarga.style.display = "block";
+	pantallaJuego.style.display = "none";
+});
+
 //crea la clase de slots con los metodos para pintar cada slot
 class Slot {
 	constructor(contenedor, slotId) {
@@ -65,7 +78,6 @@ class Slot {
 
 // instancia cada slot
 const slots = [];
-
 for (let i = 0; i < 9; i++) {
 	slots.push(new Slot(document.getElementById("slot" + i), i));
 }
@@ -158,8 +170,23 @@ function updateScore(player, score) {
 	player.innerHTML = score;
 }
 
+// esta funcion limpia el score
+function clearScore(player) {
+	player.innerHTML = 0;
+}
+
+//esta funcion reinicia los valores para reiniciar el juego
+function reiniciarJuego() {
+	inputPlayer1.value = "";
+	inputPlayer2.value = "";
+	scorePartidaPlayer1 = 0;
+	scorePartidaPlayer2 = 0;
+	scoreTotalPlayer1 = [];
+	scoreTotalPlayer2 = [];
+}
+
 // esta funcion resetea las variables del juego
-function resetJugar() {
+function limpiarTablero() {
 	slots.forEach(slot => {
 		slot.contenedor.classList.remove("pink");
 		slot.contenedor.classList.remove("green");
@@ -171,4 +198,32 @@ function resetJugar() {
 	ganador = false;
 }
 
-botonReset.addEventListener("click", resetJugar);
+botonLimpiar.addEventListener("click", limpiarTablero);
+
+// funcion para guardar en local storage
+function saveLocalStorage(key, item) {
+	let stringifiedItem = JSON.stringify(item);
+	localStorage.setItem(key, stringifiedItem);
+}
+
+// funcion para traer el elemento del local storage
+function getLocalStorage(key) {
+	return JSON.parse(localStorage.getItem(key));
+}
+
+botonGuardarPartida.addEventListener("click", function () {
+	saveLocalStorage(`${inputPlayer1.value} y ${inputPlayer2.value}`, getData);
+});
+
+let getData = {
+	"Score Total Player 1": scoreTotalPlayer1,
+	"Score Total Player 2": scoreTotalPlayer2,
+};
+
+/*localStorage.setItem("partida", JSON.stringify(getData));
+var pepe = localStorage.getItem("dataKey");
+
+saveLocalStorage(
+	`${inputPlayer1.value} y ${inputPlayer2.value}`,
+	scoreTotalPlayer1
+);*/
