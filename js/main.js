@@ -24,8 +24,7 @@ let scorePartidaPlayer2 = 0;
 let scoreTotalPlayer1 = 0;
 let scoreTotalPlayer2 = 0;
 
-let jugadaAnterior = document.getElementById("jugadaAnterior");
-let jugadaAnteriorScore = document.getElementById("jugadaAnteriorScore");
+let listaJugadasPrevias = document.getElementById("listaJugadasPrevias");
 
 let posicionesGanadoras = [
 	[0, 1, 2],
@@ -40,12 +39,6 @@ let posicionesGanadoras = [
 
 let ganador = false;
 let contadorJugadas = 0;
-
-// esto es un diccionario (par clave-valor)
-let getData = {
-	"Score Total Player 1": 0,
-	"Score Total Player 2": 0,
-};
 
 //boton que da inicio al juego
 botonJugar.addEventListener("click", function () {
@@ -176,6 +169,7 @@ botonReiniciarJuego.addEventListener("click", function () {
 	clearScore(player2Score);
 	clearGetData();
 	clearGetName();
+	/*localStorage.clear();*/
 	player1.innerHTML = inputPlayer1.value;
 	player2.innerHTML = inputPlayer2.value;
 	pantallaCarga.style.display = "block";
@@ -236,18 +230,23 @@ function getLocalStorage(key) {
 	return JSON.parse(localStorage.getItem(key));
 }
 
-let partidasGuardadas = [];
-let usuariosGuardados = [];
-let pepeloco = [];
-let gatoloco = [];
-
+// esto es un diccionario (par clave-valor), trae la info que se pasa al localstorage
+let getData = {
+	"Score Total Player 1": 0,
+	"Score Total Player 2": 0,
+};
 let getName = {
 	"nombre 1": inputPlayer1.value,
 	"nombre 2": inputPlayer2.value,
 };
 
-// este boton guarda la partida en el logalstorage
+// este boton guarda la partida en el localstorage
 botonGuardarPartida.addEventListener("click", function () {
+	let partidasGuardadas = [];
+	let usuariosGuardados = [];
+	let listaJugadores = [];
+	let listaData = [];
+
 	saveLocalStorage("nombre", getName);
 	saveLocalStorage("partidas", getData);
 	if (getLocalStorage("partidas")) {
@@ -258,16 +257,21 @@ botonGuardarPartida.addEventListener("click", function () {
 		usuariosGuardados = getLocalStorage("nombre");
 		console.log(usuariosGuardados);
 	}
-	for (let data in getData) {
-		console.log(getData[data]);
-		pepeloco.push(getData[data]);
-	}
+
 	for (let nombres in getName) {
 		console.log(getName[nombres]);
-		gatoloco.push(getName[nombres]);
+		listaJugadores.push(getName[nombres]);
 	}
-	console.log(pepeloco);
-	console.log(gatoloco);
-	jugadaAnterior.innerHTML = gatoloco;
-	jugadaAnteriorScore.innerHTML = JSON.stringify(pepeloco);
+	for (let data in getData) {
+		console.log(getData[data]);
+		listaData.push(getData[data]);
+	}
+
+	console.log(listaJugadores);
+	console.log(listaData);
+
+	let modelo = `<li>${listaJugadores.join(" y ")}<span class="mb-0 ms-4">${listaData.join(
+		" - "
+	)}</span></li>`;
+	listaJugadasPrevias.innerHTML += modelo;
 });

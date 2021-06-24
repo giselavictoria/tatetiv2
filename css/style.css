@@ -44,3 +44,7 @@ footer {
 #modal {
 	display: none;
 }
+
+#listaJugadasPrevias li {
+	list-style: none;
+}
