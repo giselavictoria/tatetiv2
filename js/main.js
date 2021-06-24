@@ -21,8 +21,11 @@ let jugadasPlayer1 = [];
 let jugadasPlayer2 = [];
 let scorePartidaPlayer1 = 0;
 let scorePartidaPlayer2 = 0;
-let scoreTotalPlayer1 = [];
-let scoreTotalPlayer2 = [];
+let scoreTotalPlayer1 = 0;
+let scoreTotalPlayer2 = 0;
+
+let jugadaAnterior = document.getElementById("jugadaAnterior");
+let jugadaAnteriorScore = document.getElementById("jugadaAnteriorScore");
 
 let posicionesGanadoras = [
 	[0, 1, 2],
@@ -38,25 +41,18 @@ let posicionesGanadoras = [
 let ganador = false;
 let contadorJugadas = 0;
 
+// esto es un diccionario (par clave-valor)
+let getData = {
+	"Score Total Player 1": 0,
+	"Score Total Player 2": 0,
+};
+
 //boton que da inicio al juego
 botonJugar.addEventListener("click", function () {
 	player1.innerHTML = inputPlayer1.value;
 	player2.innerHTML = inputPlayer2.value;
 	pantallaCarga.style.display = "none";
 	pantallaJuego.style.display = "block";
-});
-
-botonReiniciarJuego.addEventListener("click", function () {
-	reiniciarJuego();
-	limpiarTablero();
-	clearScore(player1Score);
-	clearScore(player2Score);
-	localStorage.clear();
-	localStorage.removeItem(getData);
-	player1.innerHTML = inputPlayer1.value;
-	player2.innerHTML = inputPlayer2.value;
-	pantallaCarga.style.display = "block";
-	pantallaJuego.style.display = "none";
 });
 
 //crea la clase de slots con los metodos para pintar cada slot
@@ -107,7 +103,7 @@ function jugar(slot) {
 				if (resultado) {
 					ganador = true;
 					scorePartidaPlayer1++;
-					scoreTotalPlayer1.push(scorePartidaPlayer1);
+					getData["Score Total Player 1"] = ++scoreTotalPlayer1; // actualiza el valor de la key en la posicion de memoria
 					console.log(scoreTotalPlayer1);
 					updateScore(player1Score, scorePartidaPlayer1);
 					console.log("gano player 1");
@@ -132,7 +128,7 @@ function jugar(slot) {
 				if (resultado) {
 					ganador = true;
 					scorePartidaPlayer2++;
-					scoreTotalPlayer2.push(scorePartidaPlayer2);
+					getData["Score Total Player 2"] = ++scoreTotalPlayer2;
 					console.log(scoreTotalPlayer2);
 					updateScore(player2Score, scorePartidaPlayer2);
 					console.log("gano player 2");
@@ -170,9 +166,28 @@ function updateScore(player, score) {
 	player.innerHTML = score;
 }
 
+// esta funcion reinicia el juego
+botonReiniciarJuego.addEventListener("click", function () {
+	reiniciarJuego();
+	limpiarTablero();
+	clearScore(player1Score);
+	clearScore(player2Score);
+	clearGetData();
+	player1.innerHTML = inputPlayer1.value;
+	player2.innerHTML = inputPlayer2.value;
+	pantallaCarga.style.display = "block";
+	pantallaJuego.style.display = "none";
+});
+
 // esta funcion limpia el score
 function clearScore(player) {
 	player.innerHTML = 0;
+}
+
+// esta funcion limpia la posicion de memoria
+function clearGetData() {
+	getData["Score Total Player 1"] = 0;
+	getData["Score Total Player 2"] = 0;
 }
 
 //esta funcion reinicia los valores para reiniciar el juego
@@ -181,8 +196,8 @@ function reiniciarJuego() {
 	inputPlayer2.value = "";
 	scorePartidaPlayer1 = 0;
 	scorePartidaPlayer2 = 0;
-	scoreTotalPlayer1 = [];
-	scoreTotalPlayer2 = [];
+	scoreTotalPlayer1 = 0;
+	scoreTotalPlayer2 = 0;
 }
 
 // esta funcion resetea las variables del juego
@@ -198,6 +213,7 @@ function limpiarTablero() {
 	ganador = false;
 }
 
+// este boton ejecuta la funcion de limpiar el tablero
 botonLimpiar.addEventListener("click", limpiarTablero);
 
 // funcion para guardar en local storage
@@ -211,19 +227,19 @@ function getLocalStorage(key) {
 	return JSON.parse(localStorage.getItem(key));
 }
 
+let partidasGuardadas = [];
+let pepeloco = [];
+// este boton guarda la partida en el logalstorage
 botonGuardarPartida.addEventListener("click", function () {
-	saveLocalStorage(`${inputPlayer1.value} y ${inputPlayer2.value}`, getData);
+	saveLocalStorage("partidas", getData);
+	if (getLocalStorage("partidas")) {
+		partidasGuardadas = getLocalStorage("partidas");
+	}
+	for (let data in getData) {
+		console.log(getData[data]);
+		pepeloco.push(getData[data]);
+	}
+	console.log(pepeloco);
+	/*jugadaAnterior.innerHTML = ;*/
+	jugadaAnteriorScore.innerHTML = JSON.stringify(pepeloco);
 });
-
-let getData = {
-	"Score Total Player 1": scoreTotalPlayer1,
-	"Score Total Player 2": scoreTotalPlayer2,
-};
-
-/*localStorage.setItem("partida", JSON.stringify(getData));
-var pepe = localStorage.getItem("dataKey");
-
-saveLocalStorage(
-	`${inputPlayer1.value} y ${inputPlayer2.value}`,
-	scoreTotalPlayer1
-);*/
