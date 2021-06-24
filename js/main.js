@@ -51,6 +51,8 @@ let getData = {
 botonJugar.addEventListener("click", function () {
 	player1.innerHTML = inputPlayer1.value;
 	player2.innerHTML = inputPlayer2.value;
+	getName["nombre 1"] = inputPlayer1.value;
+	getName["nombre 2"] = inputPlayer2.value;
 	pantallaCarga.style.display = "none";
 	pantallaJuego.style.display = "block";
 });
@@ -173,6 +175,7 @@ botonReiniciarJuego.addEventListener("click", function () {
 	clearScore(player1Score);
 	clearScore(player2Score);
 	clearGetData();
+	clearGetName();
 	player1.innerHTML = inputPlayer1.value;
 	player2.innerHTML = inputPlayer2.value;
 	pantallaCarga.style.display = "block";
@@ -184,10 +187,16 @@ function clearScore(player) {
 	player.innerHTML = 0;
 }
 
-// esta funcion limpia la posicion de memoria
+// esta funcion limpia la posicion de memoria de los scores
 function clearGetData() {
 	getData["Score Total Player 1"] = 0;
 	getData["Score Total Player 2"] = 0;
+}
+
+// esta funcion limpia la posicion de memoria de los nombres
+function clearGetName() {
+	getName["nombre 1"] = "";
+	getName["nombre 2"] = "";
 }
 
 //esta funcion reinicia los valores para reiniciar el juego
@@ -228,18 +237,37 @@ function getLocalStorage(key) {
 }
 
 let partidasGuardadas = [];
+let usuariosGuardados = [];
 let pepeloco = [];
+let gatoloco = [];
+
+let getName = {
+	"nombre 1": inputPlayer1.value,
+	"nombre 2": inputPlayer2.value,
+};
+
 // este boton guarda la partida en el logalstorage
 botonGuardarPartida.addEventListener("click", function () {
+	saveLocalStorage("nombre", getName);
 	saveLocalStorage("partidas", getData);
 	if (getLocalStorage("partidas")) {
 		partidasGuardadas = getLocalStorage("partidas");
+		console.log(partidasGuardadas);
+	}
+	if (getLocalStorage("nombre")) {
+		usuariosGuardados = getLocalStorage("nombre");
+		console.log(usuariosGuardados);
 	}
 	for (let data in getData) {
 		console.log(getData[data]);
 		pepeloco.push(getData[data]);
 	}
+	for (let nombres in getName) {
+		console.log(getName[nombres]);
+		gatoloco.push(getName[nombres]);
+	}
 	console.log(pepeloco);
-	/*jugadaAnterior.innerHTML = ;*/
+	console.log(gatoloco);
+	jugadaAnterior.innerHTML = gatoloco;
 	jugadaAnteriorScore.innerHTML = JSON.stringify(pepeloco);
 });
