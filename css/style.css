@@ -4,9 +4,66 @@
 	box-sizing: border-box;
 }
 
+body {
+	background-color: #222429;
+}
+
 header {
 	height: 100px;
-	background-color: hotpink;
+	background-color: #222429;
+	color: #e0e4e4;
+}
+
+.pantalla-carga {
+	height: 70vh;
+}
+
+.logo {
+	padding-left: 50px;
+	padding-top: 20px;
+}
+
+.section-right {
+	background-color: #f7f6fb;
+	min-height: 70vh;
+	padding-top: 50px;
+	border-radius: 50px 0 0 50px;
+	-webkit-box-shadow: -6px 2px 5px 0px rgba(0, 0, 0, 0.4);
+	-moz-box-shadow: -6px 2px 5px 0px rgba(0, 0, 0, 0.4);
+	box-shadow: -6px 2px 5px 0px rgba(0, 0, 0, 0.4);
+}
+
+.section-right h2 {
+	color: #222429;
+}
+
+.section-left {
+	background-color: #222429;
+	min-height: 70vh;
+	padding-top: 50px;
+}
+
+.section-left h2 {
+	color: #e0e4e4;
+}
+
+.form-floating > label {
+	color: #222429;
+}
+
+.form-control,
+.btn {
+	-webkit-box-shadow: 0px 6px 5px 0px rgba(0, 0, 0, 0.55);
+	-moz-box-shadow: 0px 6px 5px 0px rgba(0, 0, 0, 0.55);
+	box-shadow: 0px 6px 5px 0px rgba(0, 0, 0, 0.55);
+}
+
+.form-control:focus,
+.btn:active {
+	transition: border-color 0.5s ease;
+	outline: none !important;
+	border: 3px solid #41c7c7;
+	box-shadow: none;
 }
 
 #pantallaJuego {
@@ -33,11 +90,11 @@ footer {
 	background-color: hotpink;
 }
 
-.pink {
+.pink::after {
 	background-color: pink;
 }
 
-.green {
+.green::after {
 	background-color: green;
 }
 
@@ -47,4 +104,17 @@ footer {
 
 #listaJugadasPrevias li {
 	list-style: none;
+}
+
+@media screen and (max-width: 768px) {
+	.section-right {
+		border-radius: 50px 50px 0 0;
+		min-height: 60vh;
+		-webkit-box-shadow: 0px -6px 5px 0px rgba(0, 0, 0, 0.55);
+		-moz-box-shadow: 0px -6px 5px 0px rgba(0, 0, 0, 0.55);
+		box-shadow: 0px -6px 5px 0px rgba(0, 0, 0, 0.55);
+	}
+	.section-left {
+		min-height: 60vh;
+	}
 }
