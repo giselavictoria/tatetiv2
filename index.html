@@ -4,6 +4,15 @@
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<!-- GOOGLE FONTS -->
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,500&display=swap"
+			rel="stylesheet"
+		/>
+
 		<!-- LINK BOOTSTRAP -->
 		<link
 			href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
@@ -44,7 +53,7 @@
 			>
 				<div class="col-sm-12 col-md-6 section-left">
 					<div class="col-md-12 text-center mb-5">
-						<h2>Ingresa los nombres de los jugadores</h2>
+						<h2>¿Quiénes van a jugar?</h2>
 					</div>
 					<form class="col-md-12 d-flex flex-column align-items-center mt-5">
 						<div class="col-md-6 form-floating mb-3">
@@ -73,17 +82,36 @@
 					</form>
 				</div>
 
-				<div class="col-sm-12 col-md-6 text-center section-right">
+				<div class="col-sm-12 col-md-6 section-right">
 					<div class="mb-4">
-						<h2 class="mb-3">Instrucciones del juego</h2>
-						<p>Comienza el juego el Jugador 1, su color es el rosa</p>
-						<p>El siguiente en jugar es el Jugador 2, su color es el verde</p>
+						<h2 class="mb-3 text-center">¿Cómo se juega?</h2>
+						<ul
+							class="
+								d-flex
+								flex-column
+								align-items-center
+								justify-content-center
+								text-start
+							"
+						>
+							<li>Comienza el juego el Jugador 1. Su color es el rosa.</li>
+							<li>Luego juega el Jugador 2. Su color es el celeste.</li>
+							<li>Por turno pintarán la casilla elegida haciendo click en ella.</li>
+							<li>Gana el primer jugador en lograr tres colores iguales en línea.</li>
+						</ul>
 					</div>
 					<div
 						id="jugadasPrevias"
-						class="d-flex flex-column align-items-center justify-content-center mt-4"
+						class="
+							d-flex
+							flex-column
+							align-items-center
+							justify-content-center
+							mt-4
+							jugadas-previas
+						"
 					>
-						<h4 class="mt-5">Jugadas anteriores</h4>
+						<h4 class="mt-5">Otras jugadas anteriores</h4>
 						<div class="d-flex align-items-center justify-content-center">
 							<ul id="listaJugadasPrevias"></ul>
 						</div>
@@ -93,7 +121,7 @@
 		</section>
 
 		<!-- PANTALLA JUEGO - PANTALLA 2 -->
-		<section id="pantallaJuego" class="container">
+		<section id="pantallaJuego" class="container pantalla-juego">
 			<div class="row">
 				<div id="sectionScore">
 					<div class="d-flex align-items-center">
@@ -163,17 +191,6 @@
 				</div>
 			</div>
 		</div>
-
-		<!-- FOOTER -->
-		<!-- <footer class="d-flex justify-content-center align-self-center">
-			<div class="container-fluid d-flex justify-content-center align-self-center">
-				<div class="row">
-					<div class="col-md-12 text-center">
-						<p class="m-0">Desarrollado por Gisela Vercellino</p>
-					</div>
-				</div>
-			</div>
-		</footer> -->
 
 		<!-- SCRIPT BOOTSTRAP -->
 		<script

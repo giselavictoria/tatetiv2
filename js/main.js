@@ -59,11 +59,11 @@ class Slot {
 	}
 
 	pintarRosa() {
-		this.contenedor.classList.add("pink");
+		this.contenedor.classList.add("rosa");
 	}
 
-	pintarVerde() {
-		this.contenedor.classList.add("green");
+	pintarCeleste() {
+		this.contenedor.classList.add("celeste");
 	}
 }
 
@@ -102,7 +102,7 @@ function jugar(slot) {
 					console.log(scoreTotalPlayer1);
 					updateScore(player1Score, scorePartidaPlayer1);
 					console.log("gano player 1");
-					modalTexto.innerText = `Felicitaciones ${inputPlayer1.value}, sos el ganador de esta partida`;
+					modalTexto.innerText = `¡Felicitaciones ${inputPlayer1.value}, ganaste esta partida!`;
 					myModal.show();
 				} else if (!ganador && contadorJugadas === 9) {
 					console.log("Es un empate");
@@ -114,7 +114,7 @@ function jugar(slot) {
 			}
 		} else if (contadorJugadas % 2 === 1) {
 			if (!slot.slotClicked) {
-				slot.pintarVerde();
+				slot.pintarCeleste();
 				jugadasPlayer2.push(slot.slotId);
 				console.log(jugadasPlayer2);
 				resultado = busqueda(posicionesGanadoras, jugadasPlayer2);
@@ -127,7 +127,7 @@ function jugar(slot) {
 					console.log(scoreTotalPlayer2);
 					updateScore(player2Score, scorePartidaPlayer2);
 					console.log("gano player 2");
-					modalTexto.innerText = `Felicitaciones ${inputPlayer2.value}, sos el ganador de esta partida`;
+					modalTexto.innerText = `¡Felicitaciones ${inputPlayer2.value}, ganaste esta partida!`;
 					myModal.show();
 				} else if (!ganador && contadorJugadas === 9) {
 					console.log("Es un empate");
@@ -201,13 +201,14 @@ function reiniciarJuego() {
 	scorePartidaPlayer2 = 0;
 	scoreTotalPlayer1 = 0;
 	scoreTotalPlayer2 = 0;
+	pepe = 0;
 }
 
 // esta funcion resetea las variables del juego
 function limpiarTablero() {
 	slots.forEach(slot => {
-		slot.contenedor.classList.remove("pink");
-		slot.contenedor.classList.remove("green");
+		slot.contenedor.classList.remove("rosa");
+		slot.contenedor.classList.remove("celeste");
 		slot.slotClicked = false;
 	});
 	jugadasPlayer1 = [];
@@ -242,6 +243,10 @@ let getName = {
 
 // este boton guarda la partida en el localstorage
 botonGuardarPartida.addEventListener("click", function () {
+	guardarPartida();
+});
+
+function guardarPartida() {
 	let partidasGuardadas = [];
 	let usuariosGuardados = [];
 	let listaJugadores = [];
@@ -270,8 +275,20 @@ botonGuardarPartida.addEventListener("click", function () {
 	console.log(listaJugadores);
 	console.log(listaData);
 
+	crearModelo(listaJugadores, listaData);
+}
+
+let pepe = 0;
+
+function crearModelo(listaJugadores, listaData) {
 	let modelo = `<li>${listaJugadores.join(" y ")}<span class="mb-0 ms-4">${listaData.join(
 		" - "
 	)}</span></li>`;
-	listaJugadasPrevias.innerHTML += modelo;
-});
+
+	if (pepe === 0) {
+		listaJugadasPrevias.innerHTML += modelo;
+	} else if (pepe > 0) {
+		listaJugadasPrevias.lastElementChild.innerHTML = modelo;
+	}
+	++pepe;
+}
