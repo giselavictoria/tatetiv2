@@ -246,6 +246,7 @@ botonGuardarPartida.addEventListener("click", function () {
 	guardarPartida();
 });
 
+// esta funcion almacena y recupera la info en el localstorage
 function guardarPartida() {
 	let partidasGuardadas = [];
 	let usuariosGuardados = [];
@@ -278,17 +279,17 @@ function guardarPartida() {
 	crearModelo(listaJugadores, listaData);
 }
 
-let pepe = 0;
-
+let contadorPartidas = 0;
+// esta funcion crea el modelo que se inserta en la ul del html en jugadas anteriores
 function crearModelo(listaJugadores, listaData) {
 	let modelo = `<li>${listaJugadores.join(" y ")}<span class="mb-0 ms-4">${listaData.join(
 		" - "
 	)}</span></li>`;
 
-	if (pepe === 0) {
+	if (contadorPartidas === 0) {
 		listaJugadasPrevias.innerHTML += modelo;
-	} else if (pepe > 0) {
+	} else if (contadorPartidas > 0) {
 		listaJugadasPrevias.lastElementChild.innerHTML = modelo;
 	}
-	++pepe;
+	++contadorPartidas;
 }
