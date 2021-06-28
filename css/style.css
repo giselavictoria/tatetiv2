@@ -67,6 +67,11 @@ header {
 	box-shadow: none;
 }
 
+#inputHelp1,
+#inputHelp2 {
+	display: none;
+}
+
 #pantallaJuego {
 	display: none;
 }

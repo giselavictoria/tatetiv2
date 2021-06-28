@@ -5,6 +5,8 @@ let inputPlayer1 = document.getElementById("inputJugador1");
 let inputPlayer2 = document.getElementById("inputJugador2");
 let player1 = document.getElementById("player1");
 let player2 = document.getElementById("player2");
+let inputHelp1 = document.getElementById("inputHelp1");
+let inputHelp2 = document.getElementById("inputHelp2");
 
 let player1Score = document.getElementById("player1Score");
 let player2Score = document.getElementById("player2Score");
@@ -41,13 +43,22 @@ let ganador = false;
 let contadorJugadas = 0;
 
 //boton que da inicio al juego
-botonJugar.addEventListener("click", function () {
+botonJugar.addEventListener("click", function (event) {
 	player1.innerHTML = inputPlayer1.value;
 	player2.innerHTML = inputPlayer2.value;
-	getName["nombre 1"] = inputPlayer1.value;
-	getName["nombre 2"] = inputPlayer2.value;
-	pantallaCarga.style.display = "none";
-	pantallaJuego.style.display = "block";
+	if (!inputPlayer1.value && !inputPlayer2.value) {
+		inputHelp1.style.display = "block";
+		inputHelp2.style.display = "block";
+	} else if (!inputPlayer1.value) {
+		inputHelp1.style.display = "block";
+	} else if (!inputPlayer2.value) {
+		inputHelp2.style.display = "block";
+	} else {
+		getName["nombre 1"] = inputPlayer1.value;
+		getName["nombre 2"] = inputPlayer2.value;
+		pantallaCarga.style.display = "none";
+		pantallaJuego.style.display = "block";
+	}
 });
 
 //crea la clase de slots con los metodos para pintar cada slot
