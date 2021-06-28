@@ -7,6 +7,9 @@ let player1 = document.getElementById("player1");
 let player2 = document.getElementById("player2");
 let inputHelp1 = document.getElementById("inputHelp1");
 let inputHelp2 = document.getElementById("inputHelp2");
+let inputHelpBlock1 = document.getElementById("inputHelpBlock1");
+let inputHelpBlock2 = document.getElementById("inputHelpBlock2");
+let maxlength = 12;
 
 let player1Score = document.getElementById("player1Score");
 let player2Score = document.getElementById("player2Score");
@@ -43,7 +46,7 @@ let ganador = false;
 let contadorJugadas = 0;
 
 //boton que da inicio al juego
-botonJugar.addEventListener("click", function (event) {
+botonJugar.addEventListener("click", function () {
 	player1.innerHTML = inputPlayer1.value;
 	player2.innerHTML = inputPlayer2.value;
 	if (!inputPlayer1.value && !inputPlayer2.value) {
@@ -53,6 +56,20 @@ botonJugar.addEventListener("click", function (event) {
 		inputHelp1.style.display = "block";
 	} else if (!inputPlayer2.value) {
 		inputHelp2.style.display = "block";
+	} else if (
+		inputPlayer1.value.length > maxlength &&
+		inputPlayer2.value.length > maxlength
+	) {
+		inputHelpBlock1.style.display = "block";
+		inputHelpBlock2.style.display = "block";
+		inputHelp1.style.display = "none";
+		inputHelp2.style.display = "none";
+	} else if (inputPlayer1.value.length > maxlength) {
+		inputHelpBlock1.style.display = "block";
+		inputHelp1.style.display = "none";
+	} else if (inputPlayer2.value.length > maxlength) {
+		inputHelpBlock2.style.display = "block";
+		inputHelp2.style.display = "none";
 	} else {
 		getName["nombre 1"] = inputPlayer1.value;
 		getName["nombre 2"] = inputPlayer2.value;

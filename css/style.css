@@ -72,6 +72,11 @@ header {
 	display: none;
 }
 
+#inputHelpBlock1,
+#inputHelpBlock2 {
+	display: none;
+}
+
 #pantallaJuego {
 	display: none;
 }
