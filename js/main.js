@@ -71,8 +71,8 @@ botonJugar.addEventListener("click", function () {
 		inputHelpBlock2.style.display = "block";
 		inputHelp2.style.display = "none";
 	} else {
-		getName["nombre1"] = inputPlayer1.value;
-		getName["nombre2"] = inputPlayer2.value;
+		getName.nombre1 = inputPlayer1.value;
+		getName.nombre2 = inputPlayer2.value;
 		pantallaCarga.style.display = "none";
 		pantallaJuego.style.display = "block";
 	}
@@ -126,8 +126,8 @@ function jugar(slot) {
 				if (resultado) {
 					ganador = true;
 					scorePartidaPlayer1++;
-					pepeLoco(dataScoreTotalPlayer1, scoreTotalPlayer1);
-					getData["dataScoreTotalPlayer1"] = ++scoreTotalPlayer1; // actualiza el valor de la key en la posicion de memoria
+					pepeLoco(getData.dataScoreTotalPlayer1, scoreTotalPlayer1);
+					getData.dataScoreTotalPlayer1++; // actualiza el valor de la key en la posicion de memoria
 					console.log(scoreTotalPlayer1);
 					updateScore(player1Score, scorePartidaPlayer1);
 					console.log("gano player 1");
@@ -152,8 +152,8 @@ function jugar(slot) {
 				if (resultado) {
 					ganador = true;
 					scorePartidaPlayer2++;
-					getData["dataScoreTotalPlayer2"] = ++scoreTotalPlayer2;
-					console.log(scoreTotalPlayer2);
+					pepeLoco(getData.dataScoreTotalPlayer2, scoreTotalPlayer2);
+					getData.dataScoreTotalPlayer2++; // actualiza el valor de la key en la posicion de memoria
 					updateScore(player2Score, scorePartidaPlayer2);
 					console.log("gano player 2");
 					modalTexto.innerText = `¡Felicitaciones ${inputPlayer2.value}, ganaste esta partida!`;
@@ -173,7 +173,7 @@ function jugar(slot) {
 }
 
 function pepeLoco(dataScoreTotalPlayer, scoreTotalPlayer) {
-	getData["dataScoreTotalPlayer"] = ++scoreTotalPlayer;
+	getData.dataScoreTotalPlayer + scoreTotalPlayer;
 }
 
 // esta funcion recibe dos arrays y verifica si en el arr2 estan todos los items del arr1
@@ -216,14 +216,14 @@ function clearScore(player) {
 
 // esta funcion limpia la posicion de memoria de los scores
 function clearGetData() {
-	getData["dataScoreTotalPlayer1"] = 0;
-	getData["dataScoreTotalPlayer2"] = 0;
+	getData.dataScoreTotalPlayer1 = 0;
+	getData.dataScoreTotalPlayer2 = 0;
 }
 
 // esta funcion limpia la posicion de memoria de los nombres
 function clearGetName() {
-	getName["nombre1"] = "";
-	getName["nombre2"] = "";
+	getName.nombre1 = "";
+	getName.nombre2 = "";
 }
 
 //esta funcion reinicia los valores para reiniciar el juego
@@ -234,7 +234,7 @@ function reiniciarJuego() {
 	scorePartidaPlayer2 = 0;
 	scoreTotalPlayer1 = 0;
 	scoreTotalPlayer2 = 0;
-	pepe = 0;
+	contadorPartidas = 0;
 }
 
 // esta funcion resetea las variables del juego
