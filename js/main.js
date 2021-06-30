@@ -126,7 +126,7 @@ function jugar(slot) {
 				if (resultado) {
 					ganador = true;
 					scorePartidaPlayer1++;
-					pepeLoco(dataScoreTotalPlayer, scoreTotalPlayer);
+					pepeLoco(dataScoreTotalPlayer1, scoreTotalPlayer1);
 					getData["dataScoreTotalPlayer1"] = ++scoreTotalPlayer1; // actualiza el valor de la key en la posicion de memoria
 					console.log(scoreTotalPlayer1);
 					updateScore(player1Score, scorePartidaPlayer1);
