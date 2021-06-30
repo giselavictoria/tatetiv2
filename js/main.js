@@ -71,8 +71,8 @@ botonJugar.addEventListener("click", function () {
 		inputHelpBlock2.style.display = "block";
 		inputHelp2.style.display = "none";
 	} else {
-		getName["nombre 1"] = inputPlayer1.value;
-		getName["nombre 2"] = inputPlayer2.value;
+		getName["nombre1"] = inputPlayer1.value;
+		getName["nombre2"] = inputPlayer2.value;
 		pantallaCarga.style.display = "none";
 		pantallaJuego.style.display = "block";
 	}
@@ -126,7 +126,8 @@ function jugar(slot) {
 				if (resultado) {
 					ganador = true;
 					scorePartidaPlayer1++;
-					getData["Score Total Player 1"] = ++scoreTotalPlayer1; // actualiza el valor de la key en la posicion de memoria
+					pepeLoco(dataScoreTotalPlayer, scoreTotalPlayer);
+					getData["dataScoreTotalPlayer1"] = ++scoreTotalPlayer1; // actualiza el valor de la key en la posicion de memoria
 					console.log(scoreTotalPlayer1);
 					updateScore(player1Score, scorePartidaPlayer1);
 					console.log("gano player 1");
@@ -151,7 +152,7 @@ function jugar(slot) {
 				if (resultado) {
 					ganador = true;
 					scorePartidaPlayer2++;
-					getData["Score Total Player 2"] = ++scoreTotalPlayer2;
+					getData["dataScoreTotalPlayer2"] = ++scoreTotalPlayer2;
 					console.log(scoreTotalPlayer2);
 					updateScore(player2Score, scorePartidaPlayer2);
 					console.log("gano player 2");
@@ -169,6 +170,10 @@ function jugar(slot) {
 	} else if (ganador) {
 		console.log("entro al if del slots");
 	}
+}
+
+function pepeLoco(dataScoreTotalPlayer, scoreTotalPlayer) {
+	getData["dataScoreTotalPlayer"] = ++scoreTotalPlayer;
 }
 
 // esta funcion recibe dos arrays y verifica si en el arr2 estan todos los items del arr1
@@ -211,14 +216,14 @@ function clearScore(player) {
 
 // esta funcion limpia la posicion de memoria de los scores
 function clearGetData() {
-	getData["Score Total Player 1"] = 0;
-	getData["Score Total Player 2"] = 0;
+	getData["dataScoreTotalPlayer1"] = 0;
+	getData["dataScoreTotalPlayer2"] = 0;
 }
 
 // esta funcion limpia la posicion de memoria de los nombres
 function clearGetName() {
-	getName["nombre 1"] = "";
-	getName["nombre 2"] = "";
+	getName["nombre1"] = "";
+	getName["nombre2"] = "";
 }
 
 //esta funcion reinicia los valores para reiniciar el juego
@@ -261,12 +266,12 @@ function getLocalStorage(key) {
 
 // esto es un diccionario (par clave-valor), trae la info que se pasa al localstorage
 let getData = {
-	"Score Total Player 1": 0,
-	"Score Total Player 2": 0,
+	dataScoreTotalPlayer1: 0,
+	dataScoreTotalPlayer2: 0,
 };
 let getName = {
-	"nombre 1": inputPlayer1.value,
-	"nombre 2": inputPlayer2.value,
+	nombre1: inputPlayer1.value,
+	nombre2: inputPlayer2.value,
 };
 
 // este boton guarda la partida en el localstorage
