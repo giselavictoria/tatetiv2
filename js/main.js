@@ -118,51 +118,30 @@ function jugar(slot) {
 		if (contadorJugadas % 2 === 0) {
 			if (!slot.slotClicked) {
 				slot.pintarRosa();
-				jugadasPlayer1.push(slot.slotId);
-				console.log(jugadasPlayer1);
-				resultado = busqueda(posicionesGanadoras, jugadasPlayer1);
-				slot.slotClicked = true;
-				contadorJugadas++;
-				if (resultado) {
-					ganador = true;
-					scorePartidaPlayer1++;
-					pepeLoco(getData.dataScoreTotalPlayer1, scoreTotalPlayer1);
-					getData.dataScoreTotalPlayer1++; // actualiza el valor de la key en la posicion de memoria
-					console.log(scoreTotalPlayer1);
-					updateScore(player1Score, scorePartidaPlayer1);
-					console.log("gano player 1");
-					modalTexto.innerText = `¡Felicitaciones ${inputPlayer1.value}, ganaste esta partida!`;
-					myModal.show();
-				} else if (!ganador && contadorJugadas === 9) {
-					console.log("Es un empate");
-					modalTexto.innerText = `Esta vez no gano nadie, es un empate`;
-					myModal.show();
-				}
+				getData.dataScoreTotalPlayer1 = turnoJugador(
+					jugadasPlayer1,
+					slot,
+					inputPlayer1,
+					resultado,
+					scorePartidaPlayer1,
+					player1Score,
+					getData.dataScoreTotalPlayer1
+				);
 			} else if (slot.slotClicked) {
 				console.log("pinta otro");
 			}
 		} else if (contadorJugadas % 2 === 1) {
 			if (!slot.slotClicked) {
 				slot.pintarCeleste();
-				jugadasPlayer2.push(slot.slotId);
-				console.log(jugadasPlayer2);
-				resultado = busqueda(posicionesGanadoras, jugadasPlayer2);
-				slot.slotClicked = true;
-				contadorJugadas++;
-				if (resultado) {
-					ganador = true;
-					scorePartidaPlayer2++;
-					pepeLoco(getData.dataScoreTotalPlayer2, scoreTotalPlayer2);
-					getData.dataScoreTotalPlayer2++; // actualiza el valor de la key en la posicion de memoria
-					updateScore(player2Score, scorePartidaPlayer2);
-					console.log("gano player 2");
-					modalTexto.innerText = `¡Felicitaciones ${inputPlayer2.value}, ganaste esta partida!`;
-					myModal.show();
-				} else if (!ganador && contadorJugadas === 9) {
-					console.log("Es un empate");
-					modalTexto.innerText = `Esta vez no gano nadie, es un empate`;
-					myModal.show();
-				}
+				getData.dataScoreTotalPlayer2 = turnoJugador(
+					jugadasPlayer2,
+					slot,
+					inputPlayer2,
+					resultado,
+					scorePartidaPlayer2,
+					player2Score,
+					getData.dataScoreTotalPlayer2
+				);
 			} else if (slot.slotClicked) {
 				console.log("pinta otro");
 			}
@@ -172,8 +151,35 @@ function jugar(slot) {
 	}
 }
 
-function pepeLoco(dataScoreTotalPlayer, scoreTotalPlayer) {
-	getData.dataScoreTotalPlayer + scoreTotalPlayer;
+//esta funcion realiza el proceso interno de cada turno de cada jugador
+function turnoJugador(
+	jugadasPlayer,
+	slot,
+	inputPlayer,
+	resultado,
+	scorePartidaPlayer,
+	playerScore,
+	dataScoreTotalPlayer
+) {
+	jugadasPlayer.push(slot.slotId);
+	console.log(jugadasPlayer);
+	resultado = busqueda(posicionesGanadoras, jugadasPlayer);
+	slot.slotClicked = true;
+	contadorJugadas++;
+	if (resultado) {
+		ganador = true;
+		scorePartidaPlayer++;
+		dataScoreTotalPlayer = ++dataScoreTotalPlayer; // actualiza el valor de la key en la posicion de memoria
+		updateScore(playerScore, scorePartidaPlayer);
+		console.log("gano player 1");
+		modalTexto.innerText = `¡Felicitaciones ${inputPlayer.value}, ganaste esta partida!`;
+		myModal.show();
+	} else if (!ganador && contadorJugadas === 9) {
+		console.log("Es un empate");
+		modalTexto.innerText = `Esta vez no gano nadie, es un empate`;
+		myModal.show();
+	}
+	return dataScoreTotalPlayer;
 }
 
 // esta funcion recibe dos arrays y verifica si en el arr2 estan todos los items del arr1
