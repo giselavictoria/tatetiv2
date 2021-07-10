@@ -32,6 +32,7 @@ header {
 	-webkit-box-shadow: -6px 2px 5px 0px rgba(0, 0, 0, 0.4);
 	-moz-box-shadow: -6px 2px 5px 0px rgba(0, 0, 0, 0.4);
 	box-shadow: -6px 2px 5px 0px rgba(0, 0, 0, 0.4);
+	position: relative;
 }
 
 .section-right h2 {
@@ -42,6 +43,7 @@ header {
 	background-color: #222429;
 	min-height: 70vh;
 	padding-top: 50px;
+	position: relative;
 }
 
 .section-left h2 {
@@ -79,6 +81,11 @@ header {
 
 #pantallaJuego {
 	display: none;
+}
+
+#playerContainer1 img,
+#playerContainer2 img {
+	margin-right: 15px;
 }
 
 .pantalla-juego h3,
@@ -127,6 +134,22 @@ ul li span {
 
 #listaJugadasPrevias li {
 	list-style: none;
+}
+
+#botonLimpiar {
+	position: relative;
+}
+
+#botonReiniciarJuego {
+	position: relative;
+}
+
+.invisible-left {
+	left: -1000px;
+}
+
+.invisible-right {
+	right: -1000px;
 }
 
 @media screen and (max-width: 768px) {

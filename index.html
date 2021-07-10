@@ -51,7 +51,7 @@
 					pe-0
 				"
 			>
-				<div class="col-sm-12 col-md-6 section-left">
+				<div class="col-sm-12 col-md-6 section-left invisible-left">
 					<div class="col-md-12 text-center mb-5">
 						<h2>¿Quiénes van a jugar?</h2>
 					</div>
@@ -90,7 +90,7 @@
 					</form>
 				</div>
 
-				<div class="col-sm-12 col-md-6 section-right">
+				<div class="col-sm-12 col-md-6 section-right invisible-right">
 					<div class="mb-4">
 						<h2 class="mb-3 text-center">¿Cómo se juega?</h2>
 						<ul
@@ -132,11 +132,11 @@
 		<section id="pantallaJuego" class="container pantalla-juego">
 			<div class="row">
 				<div id="sectionScore">
-					<div class="d-flex align-items-center">
+					<div class="d-flex align-items-center" id="player1Container">
 						<h3 id="player1" class="me-3"></h3>
 						<span id="player1Score">0</span>
 					</div>
-					<div class="d-flex align-items-center">
+					<div class="d-flex align-items-center" id="player2Container">
 						<h3 id="player2" class="me-3"></h3>
 						<span id="player2Score">0</span>
 					</div>
@@ -159,12 +159,16 @@
 
 			<div class="row mb-4">
 				<div class="d-flex align-items-center justify-content-center">
-					<button type="button" class="col-md-3 btn btn-primary me-3" id="botonLimpiar">
+					<button
+						type="button"
+						class="col-md-3 btn btn-primary me-3 invisible-left"
+						id="botonLimpiar"
+					>
 						LIMPIAR TABLERO
 					</button>
 					<button
 						type="button"
-						class="col-md-3 btn btn-primary ms-3"
+						class="col-md-3 btn btn-primary ms-3 invisible-right"
 						id="botonReiniciarJuego"
 					>
 						REINICIAR JUEGO
@@ -204,6 +208,12 @@
 		<script
 			src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
 			integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+			crossorigin="anonymous"
+		></script>
+		<!-- SCRIPTS DE JQUERY -->
+		<script
+			src="https://code.jquery.com/jquery-3.6.0.min.js"
+			integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
 			crossorigin="anonymous"
 		></script>
 		<!-- MI JS -->

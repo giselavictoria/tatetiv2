@@ -26,8 +26,8 @@ let jugadasPlayer1 = [];
 let jugadasPlayer2 = [];
 let scorePartidaPlayer1 = 0;
 let scorePartidaPlayer2 = 0;
-let scoreTotalPlayer1 = 0;
-let scoreTotalPlayer2 = 0;
+// let scoreTotalPlayer1 = 0;
+// let scoreTotalPlayer2 = 0;
 
 let listaJugadasPrevias = document.getElementById("listaJugadasPrevias");
 
@@ -331,4 +331,67 @@ function crearModelo(listaJugadores, listaData) {
 		listaJugadasPrevias.lastElementChild.innerHTML = modelo;
 	}
 	++contadorPartidas;
+}
+
+// JQUERY
+$(document).ready(function () {
+	entranceLeft(seccionIzquierda);
+	entranceRight(seccionDerecha);
+	entranceLeft(limpiarTableroBtn);
+	entranceRight(reiniciarJuegoBtn);
+});
+
+$("#pantallaJuego").on("load", function () {
+	fadeIn(limpiarTableroBtn);
+	fadeIn(reiniciarJuegoBtn);
+});
+
+//efecto de entrada de la izquierda
+const seccionIzquierda = $(".section-left");
+const limpiarTableroBtn = $("#botonLimpiar");
+function entranceLeft(selector) {
+	if ($(selector).hasClass("invisible-left")) {
+		$(selector).animate({left: "0px"}, 1500).removeClass("invisible-left");
+	} else {
+		$(selector).animate({left: "-1000px"}, 1500).addClass("visible-left");
+	}
+}
+
+//efecto de entrada de la derecha
+const seccionDerecha = $(".section-right");
+const reiniciarJuegoBtn = $("#botonReiniciarJuego");
+function entranceRight(selector) {
+	if ($(selector).hasClass("invisible-right")) {
+		$(selector).animate({right: "0px"}, 1500).removeClass("invisible-right");
+	} else {
+		$(selector).animate({right: "-1000px"}, 1500).addClass("invisible-right");
+	}
+}
+
+function fadeIn(selector) {
+	$(selector).fadeIn(1500);
+}
+// ajax request api random user
+$.ajax({
+	url: "https://randomuser.me/api/?results=2",
+	dataType: "json",
+	success: function (data) {
+		console.log(data);
+		agregarFotoPlayer1(data);
+		agregarFotoPlayer2(data);
+	},
+});
+
+// agregar foto segun peticion api a jugador 1
+function agregarFotoPlayer1(data) {
+	$("#player1Container").prepend(
+		`<img src="${data.results[0].picture.thumbnail}" class="me-3"></img>`
+	);
+}
+
+// agregar foto segun peticion api a jugador 2
+function agregarFotoPlayer2(data) {
+	$("#player2Container").prepend(
+		`<img src="${data.results[1].picture.thumbnail}" class="me-3"></img>`
+	);
 }
