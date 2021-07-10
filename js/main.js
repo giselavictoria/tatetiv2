@@ -26,8 +26,6 @@ let jugadasPlayer1 = [];
 let jugadasPlayer2 = [];
 let scorePartidaPlayer1 = 0;
 let scorePartidaPlayer2 = 0;
-// let scoreTotalPlayer1 = 0;
-// let scoreTotalPlayer2 = 0;
 
 let listaJugadasPrevias = document.getElementById("listaJugadasPrevias");
 
@@ -75,6 +73,11 @@ botonJugar.addEventListener("click", function () {
 		getName.nombre2 = inputPlayer2.value;
 		pantallaCarga.style.display = "none";
 		pantallaJuego.style.display = "block";
+		fadeIn(limpiarTableroBtn);
+		fadeIn(reiniciarJuegoBtn);
+		fadeInFlex(grillaJuego);
+		fadeInFlex(player1Container);
+		fadeInFlex(player2Container);
 	}
 });
 
@@ -337,18 +340,10 @@ function crearModelo(listaJugadores, listaData) {
 $(document).ready(function () {
 	entranceLeft(seccionIzquierda);
 	entranceRight(seccionDerecha);
-	entranceLeft(limpiarTableroBtn);
-	entranceRight(reiniciarJuegoBtn);
-});
-
-$("#pantallaJuego").on("load", function () {
-	fadeIn(limpiarTableroBtn);
-	fadeIn(reiniciarJuegoBtn);
 });
 
 //efecto de entrada de la izquierda
 const seccionIzquierda = $(".section-left");
-const limpiarTableroBtn = $("#botonLimpiar");
 function entranceLeft(selector) {
 	if ($(selector).hasClass("invisible-left")) {
 		$(selector).animate({left: "0px"}, 1500).removeClass("invisible-left");
@@ -359,7 +354,6 @@ function entranceLeft(selector) {
 
 //efecto de entrada de la derecha
 const seccionDerecha = $(".section-right");
-const reiniciarJuegoBtn = $("#botonReiniciarJuego");
 function entranceRight(selector) {
 	if ($(selector).hasClass("invisible-right")) {
 		$(selector).animate({right: "0px"}, 1500).removeClass("invisible-right");
@@ -368,9 +362,23 @@ function entranceRight(selector) {
 	}
 }
 
+// efecto de fade in
+const limpiarTableroBtn = $("#botonLimpiar");
+const reiniciarJuegoBtn = $("#botonReiniciarJuego");
 function fadeIn(selector) {
+	console.log("fadein");
 	$(selector).fadeIn(1500);
 }
+
+// efecto de fade in con clase de flex luego del efecto
+const grillaJuego = $("#grilla");
+const player1Container = $("#player1Container");
+const player2Container = $("#player2Container");
+function fadeInFlex(selector) {
+	console.log("fadein");
+	$(selector).animate({opacity: "1"}, 1500).addClass("flex");
+}
+
 // ajax request api random user
 $.ajax({
 	url: "https://randomuser.me/api/?results=2",
