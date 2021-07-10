@@ -11,8 +11,8 @@ let inputHelpBlock1 = document.getElementById("inputHelpBlock1");
 let inputHelpBlock2 = document.getElementById("inputHelpBlock2");
 let maxlength = 12;
 
-let player1Score = document.getElementById("player1Score");
-let player2Score = document.getElementById("player2Score");
+let playerScore1 = document.getElementById("player1Score");
+let playerScore2 = document.getElementById("player2Score");
 
 let botonJugar = document.getElementById("botonJugar");
 let botonLimpiar = document.getElementById("botonLimpiar");
@@ -127,7 +127,7 @@ function jugar(slot) {
 					inputPlayer1,
 					resultado,
 					scorePartidaPlayer1,
-					player1Score,
+					playerScore1,
 					getData.dataScoreTotalPlayer1
 				);
 			} else if (slot.slotClicked) {
@@ -142,7 +142,7 @@ function jugar(slot) {
 					inputPlayer2,
 					resultado,
 					scorePartidaPlayer2,
-					player2Score,
+					playerScore2,
 					getData.dataScoreTotalPlayer2
 				);
 			} else if (slot.slotClicked) {
@@ -172,8 +172,9 @@ function turnoJugador(
 	if (resultado) {
 		ganador = true;
 		scorePartidaPlayer++;
+		console.log(scorePartidaPlayer);
 		dataScoreTotalPlayer = ++dataScoreTotalPlayer; // actualiza el valor de la key en la posicion de memoria
-		updateScore(playerScore, scorePartidaPlayer);
+		updateScore(playerScore, dataScoreTotalPlayer);
 		console.log("gano player 1");
 		modalTexto.innerText = `¡Felicitaciones ${inputPlayer.value}, ganaste esta partida!`;
 		myModal.show();
@@ -207,8 +208,8 @@ function updateScore(player, score) {
 botonReiniciarJuego.addEventListener("click", function () {
 	reiniciarJuego();
 	limpiarTablero();
-	clearScore(player1Score);
-	clearScore(player2Score);
+	clearScore(playerScore1);
+	clearScore(playerScore2);
 	clearGetData();
 	clearGetName();
 	/*localStorage.clear();*/
@@ -241,8 +242,6 @@ function reiniciarJuego() {
 	inputPlayer2.value = "";
 	scorePartidaPlayer1 = 0;
 	scorePartidaPlayer2 = 0;
-	scoreTotalPlayer1 = 0;
-	scoreTotalPlayer2 = 0;
 	contadorPartidas = 0;
 }
 
@@ -255,6 +254,7 @@ function limpiarTablero() {
 	});
 	jugadasPlayer1 = [];
 	jugadasPlayer2 = [];
+
 	contadorJugadas = 0;
 	ganador = false;
 }
