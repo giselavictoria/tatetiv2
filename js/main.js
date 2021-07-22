@@ -47,12 +47,12 @@ let contadorJugadas = 0;
 botonJugar.addEventListener("click", function () {
 	player1.innerHTML = inputPlayer1.value;
 	player2.innerHTML = inputPlayer2.value;
-	if (!inputPlayer1.value && !inputPlayer2.value) {
+	if ((!inputPlayer1.value || inputPlayer1.value.length === 0 || /^\s*$/.test(inputPlayer1.value)) && (!inputPlayer2.value || inputPlayer2.value.length === 0 || /^\s*$/.test(inputPlayer2.value) )) {
 		inputHelp1.style.display = "block";
 		inputHelp2.style.display = "block";
-	} else if (!inputPlayer1.value) {
+	} else if (!inputPlayer1.value || inputPlayer1.value.length === 0 || /^\s*$/.test(inputPlayer1.value)) {
 		inputHelp1.style.display = "block";
-	} else if (!inputPlayer2.value) {
+	} else if (!inputPlayer2.value || inputPlayer2.value.length === 0 || /^\s*$/.test(inputPlayer2.value)) {
 		inputHelp2.style.display = "block";
 	} else if (
 		inputPlayer1.value.length > maxlength &&
@@ -69,6 +69,7 @@ botonJugar.addEventListener("click", function () {
 		inputHelpBlock2.style.display = "block";
 		inputHelp2.style.display = "none";
 	} else {
+		llamarApi();
 		getName.nombre1 = inputPlayer1.value;
 		getName.nombre2 = inputPlayer2.value;
 		pantallaCarga.style.display = "none";
@@ -126,7 +127,7 @@ function jugar(slot) {
 					slot,
 					inputPlayer1,
 					resultado,
-					scorePartidaPlayer1,
+					// scorePartidaPlayer1,
 					playerScore1,
 					getData.dataScoreTotalPlayer1
 				);
@@ -141,7 +142,7 @@ function jugar(slot) {
 					slot,
 					inputPlayer2,
 					resultado,
-					scorePartidaPlayer2,
+					// scorePartidaPlayer2,
 					playerScore2,
 					getData.dataScoreTotalPlayer2
 				);
@@ -160,7 +161,7 @@ function turnoJugador(
 	slot,
 	inputPlayer,
 	resultado,
-	scorePartidaPlayer,
+	// scorePartidaPlayer,
 	playerScore,
 	dataScoreTotalPlayer
 ) {
@@ -171,8 +172,8 @@ function turnoJugador(
 	contadorJugadas++;
 	if (resultado) {
 		ganador = true;
-		scorePartidaPlayer++;
-		console.log(scorePartidaPlayer);
+		// scorePartidaPlayer++;
+		// console.log(scorePartidaPlayer);
 		dataScoreTotalPlayer = ++dataScoreTotalPlayer; // actualiza el valor de la key en la posicion de memoria
 		updateScore(playerScore, dataScoreTotalPlayer);
 		console.log("gano player 1");
@@ -240,8 +241,8 @@ function clearGetName() {
 function reiniciarJuego() {
 	inputPlayer1.value = "";
 	inputPlayer2.value = "";
-	scorePartidaPlayer1 = 0;
-	scorePartidaPlayer2 = 0;
+	/*scorePartidaPlayer1 = 0;
+	scorePartidaPlayer2 = 0;*/
 	contadorPartidas = 0;
 }
 
@@ -380,7 +381,7 @@ function fadeInFlex(selector) {
 }
 
 // ajax request api random user
-$.ajax({
+function llamarApi(){ $.ajax({
 	url: "https://randomuser.me/api/?results=2",
 	dataType: "json",
 	success: function (data) {
@@ -388,7 +389,7 @@ $.ajax({
 		agregarFotoPlayer1(data);
 		agregarFotoPlayer2(data);
 	},
-});
+})};
 
 // agregar foto segun peticion api a jugador 1
 function agregarFotoPlayer1(data) {
