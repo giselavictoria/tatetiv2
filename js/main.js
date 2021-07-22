@@ -244,6 +244,8 @@ function reiniciarJuego() {
 	/*scorePartidaPlayer1 = 0;
 	scorePartidaPlayer2 = 0;*/
 	contadorPartidas = 0;
+	removerFotoPLayer1()
+	removerFotoPLayer2()
 }
 
 // esta funcion resetea las variables del juego
@@ -394,13 +396,21 @@ function llamarApi(){ $.ajax({
 // agregar foto segun peticion api a jugador 1
 function agregarFotoPlayer1(data) {
 	$("#player1Container").prepend(
-		`<img src="${data.results[0].picture.thumbnail}" class="me-3"></img>`
+		`<img src="${data.results[0].picture.thumbnail}" class="me-3" id="img1"></img>`
 	);
 }
 
 // agregar foto segun peticion api a jugador 2
 function agregarFotoPlayer2(data) {
 	$("#player2Container").prepend(
-		`<img src="${data.results[1].picture.thumbnail}" class="me-3"></img>`
+		`<img src="${data.results[1].picture.thumbnail}" class="me-3" id="img2"></img>`
 	);
+}
+
+function removerFotoPLayer1(){
+	$("#img1").remove()
+}
+
+function removerFotoPLayer2(){
+	$("#img2").remove()
 }
